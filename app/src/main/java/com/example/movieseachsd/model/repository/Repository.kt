@@ -4,5 +4,5 @@ import com.example.movieseachsd.model.entites.Details
 
 interface Repository {
     fun getDetailsFromServer(): Details
-    fun getDetailsFromLocalStorage(): Details
+    fun getDetailsFromLocalStorage(): List<Details>
 }

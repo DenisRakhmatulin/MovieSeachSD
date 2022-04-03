@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MovieSeachSD</string>
+    <string name="error">Error</string>
+    <string name="reload">Reload</string>
+    <string name="overview_hint">A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.</string>
+    <string name="movie_title_hint">Fighting club</string>
+    <string name="release_date_hint">1999-10-12</string>
+    <string name="vote_average_hint">9.9</string>
+    <string name="genre_hint">Drama</string>
+    <string name="runtime_hint">139 min</string>
+    <string name="min">Продолжительность: %s минут</string>
 </resources>

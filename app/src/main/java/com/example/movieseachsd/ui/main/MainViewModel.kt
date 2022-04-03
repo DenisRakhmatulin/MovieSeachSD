@@ -11,7 +11,7 @@ class MainViewModel (val repository: Repository) : ViewModel() {
     private val localLiveData = MutableLiveData<AppState>()
     val liveData: LiveData<AppState> get() = localLiveData
 
-    fun getDetails() = getDataFromLocalSource()
+    fun getDetailsFromLocalSource() = getDataFromLocalSource()
 
     fun getDataFromLocalSource() {
         localLiveData.value = AppState.Loading
