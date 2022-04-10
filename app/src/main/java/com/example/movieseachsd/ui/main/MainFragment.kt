@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.movieseachsd.R
 import com.example.movieseachsd.databinding.MainFragmentBinding
 import com.example.movieseachsd.model.AppState
@@ -78,15 +77,21 @@ class MainFragment : Fragment() {
 
             is AppState.Error -> {
                 progressBar.visibility = View.GONE
+                mainView.createAndShow(getString(R.string.error), getString(R.string.reload), viewModel.getDetailsFromLocalSource())
 
-                Snackbar
+                /*Snackbar
                     .make(mainView, getString(R.string.error), Snackbar.LENGTH_INDEFINITE)
                     .setAction(getString(R.string.reload)) { viewModel.getDetailsFromLocalSource() }
-                    .show()
+                    .show()*/
             }
 
         }
 
+    }
+    fun View.createAndShow(
+        text: String, actionText: String, action: Unit,
+        length: Int = Snackbar.LENGTH_INDEFINITE) {
+        Snackbar.make(this, text, length).setAction(actionText) { action }.show()
     }
 
 
