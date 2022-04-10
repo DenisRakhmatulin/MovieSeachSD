@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.movieseachsd.R
 import com.example.movieseachsd.databinding.MainFragmentBinding
 import com.example.movieseachsd.model.AppState
@@ -38,6 +40,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             mainFragmentRecyclerView.adapter = adapter
+            mainFragmentRecyclerView.layoutManager = GridLayoutManager(context,2)
             val observer = Observer<AppState> { renderData(it) }
             viewModel.liveData.observe(viewLifecycleOwner, observer)
             viewModel.getDetailsFromLocalSource()
@@ -58,7 +61,7 @@ class MainFragment : Fragment() {
                                 putParcelable(DetailsFragment.BUNDLE_EXTRA, details)
                             }
                             manager.beginTransaction()
-                                .add(R.id.container, DetailsFragment.newInstance(bundle))
+                                .replace(R.id.container, DetailsFragment.newInstance(bundle))
                                 .addToBackStack("")
                                 .commitAllowingStateLoss()
                         }
