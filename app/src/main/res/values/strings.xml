@@ -9,4 +9,5 @@
     <string name="genre_hint">Drama</string>
     <string name="runtime_hint">139 min</string>
     <string name="min">Продолжительность: %s минут</string>
+    <string name="error_happened">Ошибка</string>
 </resources>
