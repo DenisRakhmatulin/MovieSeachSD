@@ -56,7 +56,6 @@ class DetailsFragment : Fragment() {
                             )
                             movieYear.text = appState.detailsData[0].release_date
                             movieRating.text = appState.detailsData[0].movie.vote_average.toString()
-
                         }
                     }
                 }
