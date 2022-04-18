@@ -10,6 +10,7 @@ import com.example.movieseachsd.R
 import com.example.movieseachsd.databinding.DetailsFragmentBinding
 import com.example.movieseachsd.model.AppState
 import com.example.movieseachsd.model.entites.Details
+import com.example.movieseachsd.model.entites.rest_entites.GenresDTO
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment : Fragment() {
@@ -48,30 +49,24 @@ class DetailsFragment : Fragment() {
                             mainView.visibility = View.VISIBLE
                             movieTitle.text = appState.detailsData[0].movie.movie_title
                             movieOverview.text = appState.detailsData[0].overview
-                            movieGenre.text = appState.detailsData[0].genre.toString()
+                            movieGenre.text = appState.detailsData[0].genre
                             movieRuntime.text = String.format(
                                 getString(R.string.min),
                                 appState.detailsData[0].runtime.toString()
                             )
                             movieYear.text = appState.detailsData[0].release_date
                             movieRating.text = appState.detailsData[0].movie.vote_average.toString()
-
                         }
                     }
                 }
                 if (id != null) {
                     viewModel.loadData(id)
                 }
-
-                /*movieTitle.text = movie.movie_title
-                movieOverview.text = it.overview
-                movieGenre.text = it.genre
-                movieRuntime.text = String.format(getString(R.string.min), it.runtime.toString())
-                movieYear.text = it.release_date
-                movieRating.text = movie.vote_average.toString()*/
             }
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

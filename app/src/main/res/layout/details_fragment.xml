@@ -80,7 +80,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/movie_icon"
-        app:layout_constraintTop_toBottomOf="@id/movie_title" />
+        app:layout_constraintTop_toBottomOf="@id/movie_runtime" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
         android:src="@drawable/ic_baseline_star_rate_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/movie_rating"
-        app:layout_constraintTop_toBottomOf="@id/movie_title" />
+        app:layout_constraintTop_toBottomOf="@id/movie_runtime" />
 
     <TextView
         android:id="@+id/movie_rating"
@@ -101,7 +101,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/movie_icon"
-        app:layout_constraintTop_toBottomOf="@id/movie_title" />
+        app:layout_constraintTop_toBottomOf="@id/movie_runtime" />
 
     <ProgressBar
         android:id="@+id/progressBar"

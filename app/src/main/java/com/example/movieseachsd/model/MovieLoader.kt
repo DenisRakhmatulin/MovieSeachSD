@@ -17,7 +17,7 @@ import javax.net.ssl.HttpsURLConnection
 object MovieLoader {
     fun loadMovie(id: Int): MovieDTO? {
         val uri =
-            URL("https://api.themoviedb.org/3/movie/${id}?api_key=b92fe7da8ec4b4826719674503a0a65b")
+            URL("https://api.themoviedb.org/3/movie/${id}?api_key=b92fe7da8ec4b4826719674503a0a65b&language=ru")
 
         lateinit var urlConnection: HttpsURLConnection
         return try {

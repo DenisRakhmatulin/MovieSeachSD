@@ -16,7 +16,7 @@ class DetailsViewModel(private val repository: Repository) : ViewModel() {
         Thread{
             val data = repository.getDetailsFromServer(id)
             localLiveData.postValue(AppState.Success(listOf(data)))
-        }
+        }.start()
 
     }
 }
