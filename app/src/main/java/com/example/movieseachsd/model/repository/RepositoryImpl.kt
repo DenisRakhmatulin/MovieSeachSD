@@ -13,14 +13,14 @@ class RepositoryImpl : Repository {
             movie = Movie(id, "@drawable/movie_sample_pic", dto?.title, dto?.voteAverage),
             release_date = dto?.releaseDate,
             overview = dto?.overview,
-            genre = movieGenresExtracor(dto?.genres),
+            genre = movieGenresExtractor(dto?.genres),
             runtime = dto?.runtime ?: 0
         )
     }
 
     override fun getDetailsFromLocalStorage() = getMovies()
 
-    fun movieGenresExtracor(genres: MutableList<GenresDTO>?): String {
+    fun movieGenresExtractor(genres: MutableList<GenresDTO>?): String {
         var genreList = ""
         if (genres != null) {
             for (item in genres) {
