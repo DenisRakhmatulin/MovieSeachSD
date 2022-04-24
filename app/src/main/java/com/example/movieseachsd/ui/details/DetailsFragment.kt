@@ -2,15 +2,18 @@ package com.example.movieseachsd.ui.details
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import coil.load
 import com.example.movieseachsd.R
 import com.example.movieseachsd.databinding.DetailsFragmentBinding
 import com.example.movieseachsd.model.AppState
 import com.example.movieseachsd.model.entites.Details
-import com.example.movieseachsd.model.entites.rest_entites.GenresDTO
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment : Fragment() {
@@ -32,7 +35,6 @@ class DetailsFragment : Fragment() {
         arguments?.getParcelable<Details>(BUNDLE_EXTRA)?.let {
             with(binding) {
                 val id = it.movie.movie_id
-                movieIcon.setImageResource(R.drawable.movie_sample_pic)
                 viewModel.movieLiveData.observe(viewLifecycleOwner) { appState ->
                     when (appState) {
                         is AppState.Error -> {
@@ -47,6 +49,25 @@ class DetailsFragment : Fragment() {
                         is AppState.Success -> {
                             progressBar.visibility = View.GONE
                             mainView.visibility = View.VISIBLE
+
+                            // Проверка формирования адреса через тост
+                            Toast.makeText(
+                                requireContext(),
+                                "http://image.tmdb.org/t/p/w500${appState.detailsData[0].movie.poster_path}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            val imgUrl =
+                                "http://image.tmdb.org/t/p/w500${appState.detailsData[0].movie.poster_path}"
+
+                            // Проверка формирования адреса через лог
+                            Log.i("Адрес", "адрес: ${imgUrl}")
+
+                            movieIcon.load(imgUrl) {
+                                crossfade(true)
+                                placeholder(R.drawable.movie_sample_pic)
+                            }
+
                             movieTitle.text = appState.detailsData[0].movie.movie_title
                             movieOverview.text = appState.detailsData[0].overview
                             movieGenre.text = appState.detailsData[0].genre
@@ -65,7 +86,6 @@ class DetailsFragment : Fragment() {
             }
         }
     }
-
 
 
     override fun onDestroyView() {
