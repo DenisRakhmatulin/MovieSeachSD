@@ -10,7 +10,6 @@ import com.example.movieseachsd.R
 import com.example.movieseachsd.databinding.DetailsFragmentBinding
 import com.example.movieseachsd.model.AppState
 import com.example.movieseachsd.model.entites.Details
-import com.example.movieseachsd.model.entites.rest_entites.GenresDTO
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment : Fragment() {
