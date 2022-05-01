@@ -50,24 +50,10 @@ class DetailsFragment : Fragment() {
                             progressBar.visibility = View.GONE
                             mainView.visibility = View.VISIBLE
 
-                            // Проверка формирования адреса через тост
-                            Toast.makeText(
-                                requireContext(),
-                                "http://image.tmdb.org/t/p/w500${appState.detailsData[0].movie.poster_path}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                            val imgUrl =
-                                "http://image.tmdb.org/t/p/w500${appState.detailsData[0].movie.poster_path}"
-
-                            // Проверка формирования адреса через лог
-                            Log.i("Адрес", "адрес: ${imgUrl}")
-
-                            movieIcon.load(imgUrl) {
+                            movieIcon.load("https://image.tmdb.org/t/p/w500${appState.detailsData[0].movie.poster_path}") {
                                 crossfade(true)
                                 placeholder(R.drawable.movie_sample_pic)
                             }
-
                             movieTitle.text = appState.detailsData[0].movie.movie_title
                             movieOverview.text = appState.detailsData[0].overview
                             movieGenre.text = appState.detailsData[0].genre
