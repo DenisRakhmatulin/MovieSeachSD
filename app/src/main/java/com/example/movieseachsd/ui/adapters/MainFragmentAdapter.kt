@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.movieseachsd.R
 import com.example.movieseachsd.databinding.FragmentMainRecycleItemBinding
 import com.example.movieseachsd.model.entites.Details
@@ -44,7 +45,7 @@ class MainFragmentAdapter (private val itemClickListener: MainFragment.OnItemVie
             movieTitle.text = details.movie.movie_title
             movieRating.text = details.movie.vote_average.toString()
             movieYear.text = details.release_date
-            movieIcon.setImageResource(R.drawable.movie_sample_pic)
+            movieIcon.load(R.drawable.movie_sample_pic)
 
             root.setOnClickListener{ itemClickListener.onItemViewClick(details) }
 

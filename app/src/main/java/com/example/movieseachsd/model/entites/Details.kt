@@ -14,7 +14,7 @@ data class Details(
     val runtime: Int? = 139
 ) : Parcelable
 
-fun getDefaultMovie() = Movie(550, "@drawable/movie_sample_pic", "Fighting club", 8.4)
+fun getDefaultMovie() = Movie(550, "http://image.tmdb.org/t/p/w500/66RvLrRJTm4J8l3uHXWF09AICol.jpg", "Fighting club", 8.4)
 
 fun getMovies() = listOf(
     Details(

@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/movie_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="143dp"
+        android:layout_height="207dp"
+        android:scaleType="fitXY"
         android:layout_marginTop="@dimen/margin"
-        android:src="@drawable/movie_sample_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
