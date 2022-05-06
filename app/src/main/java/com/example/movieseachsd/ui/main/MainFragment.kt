@@ -1,6 +1,8 @@
 package com.example.movieseachsd.ui.main
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +28,9 @@ class MainFragment : Fragment() {
 
     private var adapter: MainFragmentAdapter? = null
 
+    private val startPage = 1
+    private var queryText = "поиск"
+    private val includeAdult = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,11 +43,27 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
+            //adultCheck.setOnCheckedChangeListener()
+            searchText.addTextChangedListener(object : TextWatcher{
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    queryText = p0.toString()
+                    viewModel.getListFromServer(startPage, queryText, includeAdult)
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                }
+
+            })
             mainFragmentRecyclerView.adapter = adapter
             mainFragmentRecyclerView.layoutManager = GridLayoutManager(context,2)
             val observer = Observer<AppState> { renderData(it) }
             viewModel.liveData.observe(viewLifecycleOwner, observer)
-            viewModel.getDetailsFromLocalSource()
+            //viewModel.getDetailsFromLocalSource()
+
+            viewModel.getListFromServer(startPage, queryText, includeAdult)
         }
     }
 
@@ -60,7 +81,7 @@ class MainFragment : Fragment() {
                                 putParcelable(DetailsFragment.BUNDLE_EXTRA, details)
                             }
                             manager.beginTransaction()
-                                .replace(R.id.container, DetailsFragment.newInstance(bundle))
+                                .add(R.id.container, DetailsFragment.newInstance(bundle))
                                 .addToBackStack("")
                                 .commitAllowingStateLoss()
                         }

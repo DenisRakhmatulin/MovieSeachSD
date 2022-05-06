@@ -11,6 +11,7 @@ class MainViewModel (val repository: Repository) : ViewModel() {
     private val localLiveData = MutableLiveData<AppState>()
     val liveData: LiveData<AppState> get() = localLiveData
 
+
     fun getDetailsFromLocalSource() = getDataFromLocalSource()
 
     fun getDataFromLocalSource() {
@@ -20,6 +21,15 @@ class MainViewModel (val repository: Repository) : ViewModel() {
             localLiveData.postValue(AppState.Success(repository.getDetailsFromLocalStorage()))
         }.start()
 
+    }
+
+
+    fun getListFromServer(page: Int, query: String, include_adult: Boolean) {
+        localLiveData.value = AppState.Loading
+        Thread{
+            val data = repository.getListFromServer(page, query, include_adult)
+            localLiveData.postValue(AppState.Success(data))
+        }.start()
     }
 
 }
