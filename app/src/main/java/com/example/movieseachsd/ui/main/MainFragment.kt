@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
 
     private val startPage = 1
     private var queryText = "поиск"
-    private val includeAdult = false
+    private var includeAdult = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +43,11 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            //adultCheck.setOnCheckedChangeListener()
+
+            adultCheck.setOnClickListener {
+                includeAdult = adultCheck.isChecked
+            }
+
             searchText.addTextChangedListener(object : TextWatcher{
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }

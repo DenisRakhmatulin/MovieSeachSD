@@ -13,7 +13,6 @@ import com.example.movieseachsd.model.rest.SearchRepo
 class RepositoryImpl : Repository {
     override fun getDetailsFromServer(id: Int): Details {
         val dto = MovieRepo.api.getMovie(id.toString()).execute().body()
-        //val dto = MovieLoader.loadMovie(id)
         return Details(
             movie = Movie(id, dto?.posterPath, dto?.title, dto?.voteAverage),
             release_date = dto?.releaseDate,
@@ -28,10 +27,8 @@ class RepositoryImpl : Repository {
     override fun getListFromServer(page: Int, query: String, include_adult: Boolean): List<Details> {
         val dto = SearchRepo.api.getMovieList(page, query, include_adult).execute().body()
         var detailsList : List<Details> = mutableListOf()
-        if (dto != null) {
-            for(item in dto.results){
-                detailsList += Details(Movie(item.id,item.posterPath,item.title,item.voteAverage),item.releaseDate,"","")
-            }
+        dto?.results?.forEach { item ->
+            detailsList = detailsList + Details(Movie(item.id,item.posterPath,item.title,item.voteAverage),item.releaseDate,"","")
         }
         return detailsList
     }
@@ -42,10 +39,10 @@ class RepositoryImpl : Repository {
             for (item in genres) {
                 val genreItem = item.name
                 if (genreItem != null) {
-                    if (genreList.equals("")) {
-                        genreList = genreItem
+                    genreList = if (genreList == "") {
+                        genreItem
                     } else {
-                        genreList = "$genreList, $genreItem"
+                        "$genreList, $genreItem"
                     }
                 }
             }
