@@ -1,5 +1,6 @@
 package com.example.movieseachsd.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,6 +19,7 @@ import com.example.movieseachsd.ui.details.DetailsFragment
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+private const val includeAdultKey = "includeAdultKey"
 
 class MainFragment : Fragment() {
 
@@ -46,9 +48,13 @@ class MainFragment : Fragment() {
 
             adultCheck.setOnClickListener {
                 includeAdult = adultCheck.isChecked
+                saveIncludeAdultToDisk()
             }
 
-            searchText.addTextChangedListener(object : TextWatcher{
+            loadIncludeAdult()
+            initIncludeAdult()
+
+            searchText.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
 
@@ -61,14 +67,35 @@ class MainFragment : Fragment() {
                 }
 
             })
+
             mainFragmentRecyclerView.adapter = adapter
-            mainFragmentRecyclerView.layoutManager = GridLayoutManager(context,2)
+            mainFragmentRecyclerView.layoutManager = GridLayoutManager(context, 2)
             val observer = Observer<AppState> { renderData(it) }
             viewModel.liveData.observe(viewLifecycleOwner, observer)
+
             //viewModel.getDetailsFromLocalSource()
 
             viewModel.getListFromServer(startPage, queryText, includeAdult)
         }
+    }
+
+    private fun initIncludeAdult() = with(binding){
+        adultCheck.isChecked = includeAdult
+        saveIncludeAdultToDisk()
+    }
+
+    private fun loadIncludeAdult() {
+        activity?.let {
+            includeAdult =
+                activity?.getPreferences(Context.MODE_PRIVATE)?.getBoolean(includeAdultKey, false)
+                    ?: false
+        }
+    }
+
+    private fun saveIncludeAdultToDisk() {
+        val editor = activity?.getPreferences(Context.MODE_PRIVATE)?.edit()
+        editor?.putBoolean(includeAdultKey, includeAdult)
+        editor?.apply()
     }
 
     private fun renderData(appState: AppState) = with(binding) {
@@ -102,7 +129,11 @@ class MainFragment : Fragment() {
 
             is AppState.Error -> {
                 progressBar.visibility = View.GONE
-                mainView.createAndShow(getString(R.string.error), getString(R.string.reload), viewModel.getDetailsFromLocalSource())
+                mainView.createAndShow(
+                    getString(R.string.error),
+                    getString(R.string.reload),
+                    viewModel.getDetailsFromLocalSource()
+                )
 
                 /*Snackbar
                     .make(mainView, getString(R.string.error), Snackbar.LENGTH_INDEFINITE)
@@ -113,9 +144,11 @@ class MainFragment : Fragment() {
         }
 
     }
+
     fun View.createAndShow(
         text: String, actionText: String, action: Unit,
-        length: Int = Snackbar.LENGTH_INDEFINITE) {
+        length: Int = Snackbar.LENGTH_INDEFINITE
+    ) {
         Snackbar.make(this, text, length).setAction(actionText) { action }.show()
     }
 
