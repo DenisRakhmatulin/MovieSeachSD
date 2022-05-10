@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 data class Details(
     val movie: Movie = getDefaultMovie(),
-    val release_date: String? = "1999-10-12",
+    val release_date: String? = "1900-10-12",
     val overview: String? = "Описание отсутствует",
     val genre: String? = "Наверное очень многожанровый",
     val runtime: Int? = 0
