@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import com.example.movieseachsd.ui.ContentProviderFragment
 import com.example.movieseachsd.ui.history.HistoryFragment
 import com.example.movieseachsd.ui.main.MainFragment
 
@@ -29,6 +30,10 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.menu_history -> {
                 openFragment(HistoryFragment.newInstance())
+                true
+            }
+            R.id.menu_content_provider -> {
+                openFragment(ContentProviderFragment.newInstance())
                 true
             }
             else -> super.onOptionsItemSelected(item)

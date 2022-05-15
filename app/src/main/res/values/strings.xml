@@ -13,4 +13,6 @@
     <string name="search_hint">Поиск фильма…</string>
     <string name="adult_content">adult content on/off</string>
     <string name="history">История просмотра</string>
+    <string name="contacts_list">Контакты</string>
+    <string name="need_permissions_to_read_contacts">Требуется предоставить разрешение на доступ к контактам</string>
 </resources>
