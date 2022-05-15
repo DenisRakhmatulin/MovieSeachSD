@@ -8,10 +8,10 @@ import kotlinx.parcelize.Parcelize
 
 data class Details(
     val movie: Movie = getDefaultMovie(),
-    val release_date: String? = "1999-10-12",
-    val overview: String? = "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
-    val genre: String? = "Drama",
-    val runtime: Int? = 139
+    val release_date: String? = "1900-10-12",
+    val overview: String? = "Описание отсутствует",
+    val genre: String? = "Наверное очень многожанровый",
+    val runtime: Int? = 0
 ) : Parcelable
 
 fun getDefaultMovie() = Movie(550, "http://image.tmdb.org/t/p/w500/66RvLrRJTm4J8l3uHXWF09AICol.jpg", "Fighting club", 8.4)
